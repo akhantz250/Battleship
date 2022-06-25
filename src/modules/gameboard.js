@@ -93,6 +93,12 @@ const Gameboard = function () {
   // checks the gameboard, X is unsunk ship, O is unhit water, S is sunk ship, H is hit water
   const receiveAttack = function (x, y) {
     if (gameboard[x][y] === 'X' || gameboard[x][y] === 'O') {
+      if (gameboard[x][y] === 'X') {
+        gameboard[x][y] = 'S';
+        struckShip(x, y);
+      } else if (gameboard[x][y] === 'O') {
+        gameboard[x][y] = 'H';
+      }
       return true;
     } else return false;
   };

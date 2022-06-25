@@ -105,9 +105,16 @@ describe('Check lose condition', () => {
     board.struckShip(1, 3);
     board.struckShip(2, 3);
 
-    board.struckShip(0, 4);
-    board.struckShip(0, 5);
+    board.receiveAttack(0, 4);
+    board.receiveAttack(0, 5);
 
     expect(board.isFleetDestroyed()).toBe(true);
+  });
+  test('cant hit alread hit postion', () => {
+    const board = Gameboard();
+    expect(board.placeShip(0, 0, 'carrier', true)).toBe(true);
+    expect(board.receiveAttack(1, 0)).toBe(true);
+    expect(board.struckShip(1, 0)).toBe(true);
+    expect(board.receiveAttack(1, 0)).toBe(false);
   });
 });
