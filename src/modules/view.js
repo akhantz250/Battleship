@@ -3,6 +3,7 @@ import { Player } from './player';
 const viewController = (function () {
   let selectedShip;
   let placementOrientation;
+  let canStart = false;
   const shipData = {
     carrier: { location: [], facing: null },
     battleship: { location: [], facing: null },
@@ -177,12 +178,14 @@ const viewController = (function () {
     }
     shipData[name].location = location;
     shipData[name].facing = orientation;
+    _checkStartCondition();
     return true;
   }
   function removeShip(name) {
     if (name === undefined) return false;
     shipData[name].location = [];
     shipData[name].facing = null;
+    _checkStartCondition();
     return true;
   }
 
@@ -365,6 +368,17 @@ const viewController = (function () {
       } else shipOrientation = 'vertical';
       addShip(coordX, coordY, ship, shipOrientation);
     }
+  }
+  function _checkStartCondition() {
+    const startBtn = document.querySelector('#start-btn');
+    for (let ship in shipData) {
+      if (shipData[ship].location.length === 0) {
+        startBtn.setAttribute('disabled', '');
+        return false;
+      }
+    }
+    startBtn.removeAttribute('disabled');
+    return true;
   }
 
   return { initialize };
