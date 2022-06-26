@@ -9,8 +9,8 @@ const Player = function () {
     for (let i = 0; i < ships.length; i++) {
       while (
         !gameboard.placeShip(
-          helper.getRandomInt(100),
-          helper.getRandomInt(100),
+          helper.getRandomInt(10),
+          helper.getRandomInt(10),
           ships[i],
           helper.randomTrueOrFalse()
         )

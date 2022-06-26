@@ -34,7 +34,7 @@ const Gameboard = function () {
     }
     return board;
   }
-  // check within bounds and no-overlapping ships
+  // check no-overlapping ships
   function _isPlaceableSquare(x, y) {
     if (gameboard[x][y] !== 'O') return false;
     else if (gameboard[x][y] === 'O') return true;
@@ -81,7 +81,7 @@ const Gameboard = function () {
       if (y + length > 10) return false;
       // look down
       for (let i = 0; i < length; i++) {
-        if (!_isPlaceableSquare(x, y + 1)) return false;
+        if (!_isPlaceableSquare(x, y + i)) return false;
       }
       for (let j = 0; j < length; j++) {
         gameboard[x][y + j] = 'X';

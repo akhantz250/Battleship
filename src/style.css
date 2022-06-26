@@ -6,7 +6,9 @@
   --deep-purple-900: #311B92;
   --teal-800: #00695C;
   --red-500: #F44336;
-
+  --orange-800: #EF6C00;
+  --blue-800: #1565C0;
+  --pink-800:#AD1457;
 }
 *{
   margin: 0;
@@ -54,10 +56,10 @@ div.main-content{
   width: 100%;
   height: 100%;
 }
-.placement-grid div.valid-square{
+.placement-grid .valid-square{
   background-color: var(--teal-200);
 }
-.placement-grid div.invalid-square{
+.placement-grid .invalid-square{
   background-color: var(--red-500);
 }
 
@@ -108,4 +110,20 @@ div.main-content{
   color: white;
   padding: 10px;
   padding-bottom: 0px;
+}
+
+.placement-grid div.carrier-color{
+  background-color: var(--teal-800);
+}
+.placement-grid div.battleship-color{
+  background-color: var(--deep-purple-900);
+}
+.placement-grid div.destroyer-color{
+  background-color: var(--orange-800);
+}
+.placement-grid div.submarine-color{
+  background-color: var(--blue-800);
+}
+.placement-grid div.boat-color{
+  background-color: var(--pink-800);
 }
