@@ -22,19 +22,25 @@ const Player = function () {
     return gameboard.placeShip(x, y, shipname, horizontal);
   };
 
-  const attack = function (x, y) {
+  const takeAttack = function (x, y) {
     return gameboard.receiveAttack(x, y);
   };
 
-  const randomAttack = function () {
+  const takeRandomAttack = function () {
     const moves = getLegiblePlacement();
     const length = moves.length;
     const placement = moves[helper.getRandomInt(length)];
-    attack(...placement);
+    takeAttack(...placement);
   };
 
   const checkWin = function () {
     return gameboard.isFleetDestroyed();
+  };
+  const makeBoard = function (board) {
+    board.gameboard.placeShip();
+    gameboard.placeShip();
+    gameboard.placeShip();
+    gameboard.placeShip();
   };
 
   const getBoard = () => gameboard;
@@ -58,9 +64,9 @@ const Player = function () {
     placeShip,
     placeRandom,
     gameboard,
-    randomAttack,
+    takeRandomAttack,
     checkWin,
-    attack,
+    takeAttack,
   };
 };
 

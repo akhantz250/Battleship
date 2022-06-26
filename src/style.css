@@ -43,6 +43,7 @@ div.main-content{
 .placement-grid{
   height: 500px;
   width: 500px;
+  min-width: 500px;
   background-color: white;
   border: 3px solid black;
   display: grid;

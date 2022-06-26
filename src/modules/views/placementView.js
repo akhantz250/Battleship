@@ -1,6 +1,6 @@
-import { helper } from './helper';
-import { Player } from './player';
-const viewController = (function () {
+import { helper } from '../app/helper';
+import { Player } from '../app/player';
+const placementView = (function () {
   let selectedShip;
   let placementOrientation;
   let canStart = false;
@@ -11,9 +11,25 @@ const viewController = (function () {
     submarine: { location: [], facing: null },
     boat: { location: [], facing: null },
   };
-  const placementGrid = document.querySelector('.placement-grid');
-
+  let placementGrid;
+  let content = document.querySelector('.target');
   const initialize = function () {
+    content.innerHTML = `
+    <div class ="main-content">
+      <div class="button-panel">
+        <button id="rotate-btn">Rotate</button>
+        <button id="randomise-btn">Randomise</button>
+        <button id="reset-btn">Reset</button>
+        <button id="start-btn" disabled>Start</button>
+      </div>
+      <div class="placement-grid"></div>
+      <div class="ship-panel">
+        <h3>Place your ships</h3>
+        <div class="ship-button-container"></div>
+      </div>
+    </div>
+    `;
+    placementGrid = document.querySelector('.placement-grid');
     selectedShip = null;
     placementOrientation = 'horizontal';
     _makePlacementGrid();
@@ -188,7 +204,6 @@ const viewController = (function () {
     _checkStartCondition();
     return true;
   }
-
   function renderGrid() {
     const squares = document.querySelectorAll('.placement-grid > *');
     squares.forEach((square) => {
@@ -384,4 +399,4 @@ const viewController = (function () {
   return { initialize };
 })();
 
-export { viewController };
+export { placementView };

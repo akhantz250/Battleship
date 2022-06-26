@@ -1,4 +1,4 @@
 import './style.css';
-import { viewController } from './modules/view';
+import { placementView } from './modules/views/placementView';
 
-viewController.initialize();
+placementView.initialize();
