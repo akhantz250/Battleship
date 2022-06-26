@@ -4,6 +4,9 @@
   --teal-200: #80CBC4;
   --deep-purple-300:#9575CD;
   --deep-purple-900: #311B92;
+  --teal-800: #00695C;
+  --red-500: #F44336;
+
 }
 *{
   margin: 0;
@@ -51,6 +54,12 @@ div.main-content{
   width: 100%;
   height: 100%;
 }
+.placement-grid div.valid-square{
+  background-color: var(--teal-200);
+}
+.placement-grid div.invalid-square{
+  background-color: var(--red-500);
+}
 
 .ship-panel,.button-panel{
   border: 3px solid black;
@@ -85,7 +94,12 @@ div.main-content{
   box-shadow: 2px 2px 3px rgb(101, 101, 101);
 }
 
-.button-panel button:hover:not(:disabled), .ship-button-container button:hover:not(:disabled){
+.ship-button-container button.selected{
+  background-color: var(--teal-800);
+  color: white;
+}
+
+.button-panel button:hover:not(:disabled), .ship-button-container button:hover:not(.selected){
   background-color: rgb(197, 197, 197);
 }
 

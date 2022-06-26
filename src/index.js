@@ -1,4 +1,4 @@
 import './style.css';
-import { viewController } from './modules/tests/view';
+import { viewController } from './modules/view';
 
 viewController.initialize();
