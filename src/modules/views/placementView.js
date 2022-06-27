@@ -1,9 +1,11 @@
+import { gameController } from '../app/gamecontroller';
 import { helper } from '../app/helper';
 import { Player } from '../app/player';
 const placementView = (function () {
   let selectedShip;
   let placementOrientation;
-  let canStart = false;
+  let gamemode;
+  let playersSet = 0;
   const shipData = {
     carrier: { location: [], facing: null },
     battleship: { location: [], facing: null },
@@ -15,12 +17,14 @@ const placementView = (function () {
   let content = document.querySelector('.target');
   const initialize = function () {
     content.innerHTML = `
-    <div class ="main-content">
+    <div class="main-content">
+    <h2 class="placement-info">Player n choose board</h2>
+    <div class="placement-container">
       <div class="button-panel">
         <button id="rotate-btn">Rotate</button>
         <button id="randomise-btn">Randomise</button>
         <button id="reset-btn">Reset</button>
-        <button id="start-btn" disabled>Start</button>
+        <button id="go-btn" disabled>Go</button>
       </div>
       <div class="placement-grid"></div>
       <div class="ship-panel">
@@ -28,13 +32,25 @@ const placementView = (function () {
         <div class="ship-button-container"></div>
       </div>
     </div>
+  </div>
     `;
     placementGrid = document.querySelector('.placement-grid');
     selectedShip = null;
     placementOrientation = 'horizontal';
+    _clearShipData();
+    _updateTurnDisplay();
     _makePlacementGrid();
     _makeButtons();
     _setUpControlBtns();
+  };
+  const setGamemode = function (mode) {
+    if (mode === 'player') {
+      gamemode = mode;
+      return true;
+    } else if (mode === 'cpu') {
+      gamemode = mode;
+      return true;
+    } else return false;
   };
   function _makePlacementGrid() {
     for (let y = 0; y < 10; y++) {
@@ -85,6 +101,7 @@ const placementView = (function () {
     const rotateBtn = document.querySelector('#rotate-btn');
     const resetBtn = document.querySelector('#reset-btn');
     const randomBtn = document.querySelector('#randomise-btn');
+    const goBtn = document.querySelector('#go-btn');
     rotateBtn.addEventListener('click', () => {
       placementOrientation =
         placementOrientation === 'horizontal' ? 'vertical' : 'horizontal';
@@ -105,11 +122,31 @@ const placementView = (function () {
       removeShip('submarine');
       removeShip('boat');
       const board = _getRandomBoard();
-      console.log(board);
       _addRandomBoard(board);
       _makeButtons();
       renderGrid();
       selectedShip = null;
+    });
+    goBtn.addEventListener('click', () => {
+      if (gamemode === 'cpu') {
+        console.log('game started');
+        const board = Object.assign({}, shipData);
+        gameController.createPlayer1(board);
+        gameController.createPlayer2(null);
+        // gameController.startGame();
+        // gameView.initialize();
+      } else if (gamemode === 'player') {
+        if (playersSet === 0) {
+          playersSet++;
+          const board = Object.assign({}, shipData);
+          gameController.createPlayer1(board);
+          initialize();
+        } else if (playersSet === 1) {
+          const board = Object.assign({}, shipData);
+          gameController.createPlayer2(board);
+          console.log('player 2 set');
+        }
+      }
     });
   }
   // returns true or false if mouseover sqaure is a valid placement
@@ -385,7 +422,7 @@ const placementView = (function () {
     }
   }
   function _checkStartCondition() {
-    const startBtn = document.querySelector('#start-btn');
+    const startBtn = document.querySelector('#go-btn');
     for (let ship in shipData) {
       if (shipData[ship].location.length === 0) {
         startBtn.setAttribute('disabled', '');
@@ -395,8 +432,18 @@ const placementView = (function () {
     startBtn.removeAttribute('disabled');
     return true;
   }
+  function _clearShipData() {
+    for (let ship in shipData) {
+      shipData[ship].location = [];
+      shipData[ship].facing = null;
+    }
+  }
+  function _updateTurnDisplay() {
+    const infoDisplay = document.querySelector('.placement-info');
+    infoDisplay.textContent = `Player ${playersSet + 1}'s turn to place`;
+  }
 
-  return { initialize };
+  return { initialize, setGamemode };
 })();
 
 export { placementView };

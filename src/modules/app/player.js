@@ -18,8 +18,8 @@ const Player = function () {
     }
   };
 
-  const placeShip = function (x, y, shipname, horizontal) {
-    return gameboard.placeShip(x, y, shipname, horizontal);
+  const placeShip = function (x, y, shipname, isHorizontal) {
+    return gameboard.placeShip(x, y, shipname, isHorizontal);
   };
 
   const takeAttack = function (x, y) {
@@ -37,10 +37,12 @@ const Player = function () {
     return gameboard.isFleetDestroyed();
   };
   const makeBoard = function (board) {
-    board.gameboard.placeShip();
-    gameboard.placeShip();
-    gameboard.placeShip();
-    gameboard.placeShip();
+    for (const ship in board) {
+      const xpos = board[ship].location[0]['x'];
+      const ypos = board[ship].location[0]['y'];
+      const isHorizontal = board[ship].facing === 'horizontal' ? true : false;
+      placeShip(xpos, ypos, ship, isHorizontal);
+    }
   };
 
   const getBoard = () => gameboard;
@@ -59,14 +61,15 @@ const Player = function () {
   }
 
   return {
+    gameboard,
     getLegiblePlacement,
     getBoard,
     placeShip,
     placeRandom,
-    gameboard,
     takeRandomAttack,
     checkWin,
     takeAttack,
+    makeBoard,
   };
 };
 

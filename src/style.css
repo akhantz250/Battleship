@@ -3,6 +3,7 @@
   font-size: 16px;
   --teal-200: #80CBC4;
   --deep-purple-300:#9575CD;
+  --deep-purple-600: #5E35B1;
   --deep-purple-900: #311B92;
   --teal-800: #00695C;
   --red-500: #F44336;
@@ -31,14 +32,31 @@ header h1{
   font-size: 40px;
   color: var(--deep-purple-900);
 }
-div.main-content{
-  height: calc(100vh - 100px);
-  min-height: 500px;
-  width: 100%;
+div.select-content{
+  height: 100%;
   margin: auto;
+  width: 100%;
+  min-height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+div.select-panel{
+  background-color: white;
+  width: 280px;
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.select-panel h2{
+  text-align: center;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+div.target{
+  height: calc(100vh - 100px);
+  width: 100%;
 }
 .placement-grid{
   height: 500px;
@@ -97,6 +115,25 @@ div.main-content{
   box-shadow: 2px 2px 3px rgb(101, 101, 101);
 }
 
+.select-btn-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+.select-btn-container button{
+  display: block;
+  width: 120px;
+  padding: 10px 5px;
+  border: none;
+  background-color: var(--deep-purple-600);
+  color: white;
+  border-radius: 5px;
+}
+.select-btn-container button:hover{
+  background-color: var(--deep-purple-900);
+}
+
 .ship-button-container button.selected{
   background-color: var(--teal-800);
   color: white;
@@ -110,7 +147,6 @@ div.main-content{
   text-align: center;
   color: white;
   padding: 10px;
-  padding-bottom: 0px;
 }
 
 .placement-grid div.carrier-color{
@@ -127,4 +163,27 @@ div.main-content{
 }
 .placement-grid div.boat-color{
   background-color: var(--pink-800);
+}
+div.main-content{
+  height: 100%;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.placement-container{
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.placement-info{
+  width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  white-space: nowrap;
 }
