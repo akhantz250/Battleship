@@ -2,14 +2,14 @@
 :root{
   font-size: 16px;
   --teal-200: #80CBC4;
+  --teal-500: #009688;
   --deep-purple-300:#9575CD;
   --deep-purple-600: #5E35B1;
   --deep-purple-900: #311B92;
   --teal-800: #00695C;
   --red-500: #F44336;
-  --orange-800: #EF6C00;
-  --blue-800: #1565C0;
-  --pink-800:#AD1457;
+  --gray-500: #9E9E9E;
+  --light-blue-300: #4FC3F7;
 }
 *{
   margin: 0;
@@ -64,17 +64,26 @@ div.target{
   width: 500px;
   min-width: 500px;
   background-color: white;
-  border: 3px solid black;
+  /* border: 3px solid black; */
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-bottom: 3px solid black;
+  border-right: 3px solid black;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   margin: 0 100px;
 }
-.placement-grid-square{
-  border: 1px solid black;
+.placement-grid-square,.attack-grid-square,.display-grid-square{
+  /* border: 1px solid black; */
+  border-left: 1px solid black;
+  border-top: 1px solid black;
   background-color: white;
   width: 100%;
   height: 100%;
+}
+div.attack-grid-square{
+  background-color: var(--gray-500);
 }
 .placement-grid .valid-square{
   background-color: var(--teal-200);
@@ -141,20 +150,20 @@ div.target{
   color: white;
   padding: 10px;
 }
-.placement-grid div.carrier-color{
+.placement-grid div.carrier-color,.display-grid div.carrier-color{
   background-color: var(--teal-800);
 }
-.placement-grid div.battleship-color{
+.placement-grid div.battleship-color,.display-grid div.battleship-color{
   background-color: var(--deep-purple-900);
 }
-.placement-grid div.destroyer-color{
-  background-color: var(--orange-800);
+.placement-grid div.destroyer-color,.display-grid div.destroyer-color{
+  background-color: var(--teal-500);
 }
-.placement-grid div.submarine-color{
-  background-color: var(--blue-800);
+.placement-grid div.submarine-color,.display-grid div.submarine-color{
+  background-color: var(--deep-purple-600);
 }
-.placement-grid div.boat-color{
-  background-color: var(--pink-800);
+.placement-grid div.boat-color,.display-grid div.boat-color{
+  background-color: var(--deep-purple-300);
 }
 div.main-content{
   width: 100%;
@@ -208,7 +217,10 @@ div.main-content{
   width: 400px;
   height: 400px;
   background-color:white;
-  border: 2px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-bottom: 3px solid black;
+  border-right: 3px solid black;
   display: grid;
   grid-template-columns: repeat(10,1fr);
   grid-template-rows: repeat(10,1fr);
@@ -222,4 +234,16 @@ div.main-content{
   background-color: #9575CD;
   border-radius: 10px;
   border: 3px solid var(--deep-purple-600) ;
+}
+.sunk{
+  background-image: url(./assets/explosion.png);
+  background-position: center;
+  background-size: cover;
+}
+.display-grid div.miss, .attack-grid div.miss{
+  background-color: var(--light-blue-300);
+}
+
+.attack-grid div.sunk{
+  background-color: var(--red-500);
 }

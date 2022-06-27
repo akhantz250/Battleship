@@ -11,8 +11,12 @@ const Gameboard = function () {
   const boat = Ship(2, 'boat');
 
   // getters
-  const getGameboard = () => gameboard;
-  const getShipLocation = () => shipLocation;
+  const getGameboard = () => {
+    return gameboard;
+  };
+  const getShipLocation = () => {
+    return shipLocation;
+  };
 
   // ship location data
   const shipLocation = {

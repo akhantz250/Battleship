@@ -1,7 +1,8 @@
+import { gameView } from '../views/gameView';
 import { Player } from './player';
 
 const gameController = (function () {
-  let player1, player2, gamemode;
+  let player1, player2, gamemode, turnNo, currentPlayerTurn;
   const createPlayer1 = function (board) {
     player1 = Player();
     if (board === null) {
@@ -22,9 +23,75 @@ const gameController = (function () {
   };
   const startGame = function (mode) {
     gamemode = mode === 'player' ? 'player' : 'cpu';
+    currentPlayerTurn = 1;
+    turnNo = 1;
+  };
+  const getPlayerOneShips = function () {
+    return player1.gameboard.getShipLocation();
+  };
+  const getPlayerTwoShips = function () {
+    return player2.gameboard.getShipLocation();
+  };
+  const getPlayerOneBoard = function () {
+    return player1.gameboard.getGameboard();
+  };
+  const getPlayerTwoBoard = function () {
+    return player2.gameboard.getGameboard();
+  };
+  const changeTurn = function (x, y) {
+    if (currentPlayerTurn === 1) {
+      if (player2.takeAttack(x, y)) {
+        const ship = getPlayerTwoShips();
+        const displayBoard = getPlayerTwoBoard();
+        const attackboard = getPlayerOneBoard();
+        // load player 2's view
+        currentPlayerTurn = 2;
+        gameView.loadTurn(
+          ship,
+          displayBoard,
+          attackboard,
+          currentPlayerTurn,
+          turnNo
+        );
+        return true;
+      } else {
+        console.log('invalid move');
+        return false;
+      }
+    } else if (currentPlayerTurn === 2) {
+      if (player1.takeAttack(x, y)) {
+        const ship = getPlayerOneShips();
+        const displayBoard = getPlayerOneBoard();
+        const attackBoard = getPlayerTwoBoard();
+        // load player 1's view
+        currentPlayerTurn = 1;
+        turnNo++;
+        gameView.loadTurn(
+          ship,
+          displayBoard,
+          attackBoard,
+          currentPlayerTurn,
+          turnNo
+        );
+        return true;
+      } else {
+        console.log('invalid move');
+        return false;
+      }
+    }
+    return false;
   };
 
-  return { startGame, createPlayer1, createPlayer2 };
+  return {
+    startGame,
+    createPlayer1,
+    createPlayer2,
+    getPlayerOneShips,
+    getPlayerTwoShips,
+    getPlayerOneBoard,
+    getPlayerTwoBoard,
+    changeTurn,
+  };
 })();
 
 export { gameController };
