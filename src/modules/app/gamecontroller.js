@@ -39,7 +39,7 @@ const gameController = (function () {
     return player2.gameboard.getGameboard();
   };
   const changeTurn = function (x, y) {
-    if (currentPlayerTurn === 1) {
+    if (currentPlayerTurn === 1 && gamemode === 'player') {
       if (player2.takeAttack(x, y)) {
         const ship = getPlayerTwoShips();
         const displayBoard = getPlayerTwoBoard();
@@ -51,14 +51,15 @@ const gameController = (function () {
           displayBoard,
           attackboard,
           currentPlayerTurn,
-          turnNo
+          turnNo,
+          gamemode
         );
         return true;
       } else {
         console.log('invalid move');
         return false;
       }
-    } else if (currentPlayerTurn === 2) {
+    } else if (currentPlayerTurn === 2 && gamemode === 'player') {
       if (player1.takeAttack(x, y)) {
         const ship = getPlayerOneShips();
         const displayBoard = getPlayerOneBoard();
@@ -71,12 +72,29 @@ const gameController = (function () {
           displayBoard,
           attackBoard,
           currentPlayerTurn,
-          turnNo
+          turnNo,
+          gamemode
         );
         return true;
       } else {
         console.log('invalid move');
         return false;
+      }
+    } else if (gamemode === 'cpu') {
+      if (player2.takeAttack(x, y)) {
+        player1.takeRandomAttack();
+        turnNo++;
+        const ship = getPlayerOneShips();
+        const displayBoard = getPlayerOneBoard();
+        const attackBoard = getPlayerTwoBoard();
+        gameView.loadTurn(
+          ship,
+          displayBoard,
+          attackBoard,
+          currentPlayerTurn,
+          turnNo,
+          gamemode
+        );
       }
     }
     return false;

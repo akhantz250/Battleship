@@ -2,7 +2,8 @@
 :root{
   font-size: 16px;
   --teal-200: #80CBC4;
-  --teal-500: #009688;
+  --teal-600: #26A69A;
+  --teal-400:#26A69A;
   --deep-purple-300:#9575CD;
   --deep-purple-600: #5E35B1;
   --deep-purple-900: #311B92;
@@ -151,16 +152,16 @@ div.attack-grid-square{
   padding: 10px;
 }
 .placement-grid div.carrier-color,.display-grid div.carrier-color{
-  background-color: var(--teal-800);
-}
-.placement-grid div.battleship-color,.display-grid div.battleship-color{
   background-color: var(--deep-purple-900);
 }
+.placement-grid div.battleship-color,.display-grid div.battleship-color{
+  background-color: var(--teal-800);
+}
 .placement-grid div.destroyer-color,.display-grid div.destroyer-color{
-  background-color: var(--teal-500);
+  background-color: var(--deep-purple-600);
 }
 .placement-grid div.submarine-color,.display-grid div.submarine-color{
-  background-color: var(--deep-purple-600);
+  background-color: var(--teal-600);
 }
 .placement-grid div.boat-color,.display-grid div.boat-color{
   background-color: var(--deep-purple-300);

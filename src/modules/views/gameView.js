@@ -126,9 +126,10 @@ const gameView = (function () {
     displayBoard,
     attackBoard,
     currentPlayer,
-    turnNo
+    turnNo,
+    mode
   ) {
-    switchGridPos(currentPlayer);
+    if (mode === 'player') switchGridPos(currentPlayer);
     renderAttackGrid(attackBoard);
     renderDisplayGrid(ships, displayBoard);
     updateInfo(currentPlayer, turnNo);
