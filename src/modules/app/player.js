@@ -33,7 +33,7 @@ const Player = function () {
     takeAttack(...placement);
   };
 
-  const checkWin = function () {
+  const checkLose = function () {
     return gameboard.isFleetDestroyed();
   };
   const makeBoard = function (board) {
@@ -67,7 +67,7 @@ const Player = function () {
     placeShip,
     placeRandom,
     takeRandomAttack,
-    checkWin,
+    checkLose,
     takeAttack,
     makeBoard,
   };

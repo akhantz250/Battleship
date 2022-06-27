@@ -2,7 +2,7 @@ import { gameView } from '../views/gameView';
 import { Player } from './player';
 
 const gameController = (function () {
-  let player1, player2, gamemode, turnNo, currentPlayerTurn;
+  let player1, player2, gamemode, turnNo, currentPlayerTurn, isGameover;
   const createPlayer1 = function (board) {
     player1 = Player();
     if (board === null) {
@@ -25,6 +25,7 @@ const gameController = (function () {
     gamemode = mode === 'player' ? 'player' : 'cpu';
     currentPlayerTurn = 1;
     turnNo = 1;
+    isGameover = false;
   };
   const getPlayerOneShips = function () {
     return player1.gameboard.getShipLocation();
@@ -39,8 +40,14 @@ const gameController = (function () {
     return player2.gameboard.getGameboard();
   };
   const changeTurn = function (x, y) {
+    if (isGameover) return false;
     if (currentPlayerTurn === 1 && gamemode === 'player') {
       if (player2.takeAttack(x, y)) {
+        if (player2.checkLose() === true) {
+          isGameover = true;
+          alert('Player 1 is the winner!');
+          return false;
+        }
         const ship = getPlayerTwoShips();
         const displayBoard = getPlayerTwoBoard();
         const attackboard = getPlayerOneBoard();
@@ -61,6 +68,11 @@ const gameController = (function () {
       }
     } else if (currentPlayerTurn === 2 && gamemode === 'player') {
       if (player1.takeAttack(x, y)) {
+        if (player1.checkLose() === true) {
+          isGameover = true;
+          alert('Player 2 is the winner!');
+          return false;
+        }
         const ship = getPlayerOneShips();
         const displayBoard = getPlayerOneBoard();
         const attackBoard = getPlayerTwoBoard();
@@ -82,7 +94,18 @@ const gameController = (function () {
       }
     } else if (gamemode === 'cpu') {
       if (player2.takeAttack(x, y)) {
+        if (player2.checkLose() === true) {
+          isGameover = true;
+          alert('Player 1 is the winner!');
+          return false;
+        }
         player1.takeRandomAttack();
+
+        if (player1.checkLose() === true) {
+          isGameover = true;
+          alert('CPU is the winner!');
+          return false;
+        }
         turnNo++;
         const ship = getPlayerOneShips();
         const displayBoard = getPlayerOneBoard();

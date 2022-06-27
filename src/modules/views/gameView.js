@@ -139,6 +139,7 @@ const gameView = (function () {
     const infoElement = document.querySelector('.game-info h2');
     infoElement.textContent = `Turn ${turnNo}: Player ${player}'s turn`;
   }
-  return { initialize, renderAttackGrid, loadTurn };
+  const loadWin = function () {};
+  return { initialize, renderAttackGrid, loadTurn, loadWin };
 })();
 export { gameView };
