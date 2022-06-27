@@ -139,7 +139,90 @@ const gameView = (function () {
     const infoElement = document.querySelector('.game-info h2');
     infoElement.textContent = `Turn ${turnNo}: Player ${player}'s turn`;
   }
-  const loadWin = function () {};
+  function _setUpModal(winner, mode) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal-container');
+    modal.innerHTML = `
+    <div class="modal">
+        <h2 class="winner"></h2>
+        <h3>Play again?</h3>
+        <div class="modal-btn-container">
+          <button id="btn-yes">Yes</button>
+          <button id="btn-no">No</button>
+        </div>
+      </div>`;
+    const bodyElement = document.querySelector('body');
+    bodyElement.appendChild(modal);
+    const winnerElement = document.querySelector('.winner');
+    if (mode === 'cpu' && winner === 2) {
+      winnerElement.textContent = 'You lost.';
+    } else {
+      winnerElement.textContent =
+        winner === 1 ? `Player One has won!` : 'Player Two has won!';
+    }
+    const yesBtn = document.querySelector('#btn-yes');
+    const noBtn = document.querySelector('#btn-no');
+    yesBtn.addEventListener('click', () => location.reload());
+    noBtn.addEventListener('click', () => bodyElement.removeChild(modal));
+  }
+  function _createRevealGrid(ships, board) {
+    const grid = document.createElement('div');
+    grid.classList.add('reveal-grid');
+    for (let j = 0; j < 10; j++) {
+      for (let i = 0; i < 10; i++) {
+        const square = document.createElement('div');
+        square.classList.add('reveal-grid-square');
+        square.dataset.x = j;
+        square.dataset.y = i;
+
+        if (board[i][j] === 'H') {
+          square.classList.add('miss');
+        } else if (board[i][j] === 'S') {
+          square.classList.add('sunk');
+        }
+        for (const ship in ships) {
+          for (let z = 0; z < ships[ship].length; z++) {
+            const xpos = ships[ship][z]['x'];
+            const ypos = ships[ship][z]['y'];
+            if (i === xpos && j === ypos) square.classList.add(`${ship}-color`);
+          }
+        }
+        grid.appendChild(square);
+      }
+    }
+    return grid;
+  }
+  const loadWin = function (winner, mode) {
+    _setUpModal(winner, mode);
+    if (winner === 1 || mode === 'cpu') {
+      leftSide.removeChild(displayGrid);
+      rightSide.removeChild(attackGrid);
+    } else if (winner === 2) {
+      leftSide.removeChild(attackGrid);
+      rightSide.removeChild(displayGrid);
+    }
+    leftSide.appendChild(
+      _createRevealGrid(
+        gameController.getPlayerOneShips(),
+        gameController.getPlayerOneBoard()
+      )
+    );
+    rightSide.appendChild(
+      _createRevealGrid(
+        gameController.getPlayerTwoShips(),
+        gameController.getPlayerTwoBoard()
+      )
+    );
+    if (mode === 'cpu') {
+      const winnerText = winner === 1 ? 'You have won!' : 'You have lost.';
+      const infoElement = document.querySelector('.game-info h2');
+      infoElement.textContent = winnerText;
+    } else if (mode === 'player') {
+      const winnerText = winner === 1 ? 'One' : 'Two';
+      const infoElement = document.querySelector('.game-info h2');
+      infoElement.textContent = `Player ${winnerText} has won!`;
+    }
+  };
   return { initialize, renderAttackGrid, loadTurn, loadWin };
 })();
 export { gameView };

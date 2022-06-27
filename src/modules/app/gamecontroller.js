@@ -45,7 +45,7 @@ const gameController = (function () {
       if (player2.takeAttack(x, y)) {
         if (player2.checkLose() === true) {
           isGameover = true;
-          alert('Player 1 is the winner!');
+          gameView.loadWin(1, gamemode);
           return false;
         }
         const ship = getPlayerTwoShips();
@@ -70,7 +70,7 @@ const gameController = (function () {
       if (player1.takeAttack(x, y)) {
         if (player1.checkLose() === true) {
           isGameover = true;
-          alert('Player 2 is the winner!');
+          gameView.loadWin(2, gamemode);
           return false;
         }
         const ship = getPlayerOneShips();
@@ -96,14 +96,13 @@ const gameController = (function () {
       if (player2.takeAttack(x, y)) {
         if (player2.checkLose() === true) {
           isGameover = true;
-          alert('Player 1 is the winner!');
+          gameView.loadWin(1, gamemode);
           return false;
         }
         player1.takeRandomAttack();
-
         if (player1.checkLose() === true) {
           isGameover = true;
-          alert('CPU is the winner!');
+          gameView.loadWin(2, gamemode);
           return false;
         }
         turnNo++;

@@ -8,6 +8,9 @@
   --deep-purple-600: #5E35B1;
   --deep-purple-900: #311B92;
   --teal-800: #00695C;
+  --green-800: #1B5E20;
+  --pink-900:#880E4F;
+
   --red-500: #F44336;
   --gray-500: #9E9E9E;
   --light-blue-300: #4FC3F7;
@@ -75,7 +78,7 @@ div.target{
   grid-template-rows: repeat(10, 1fr);
   margin: 0 100px;
 }
-.placement-grid-square,.attack-grid-square,.display-grid-square{
+.placement-grid-square,.attack-grid-square,.display-grid-square,.reveal-grid-square{
   /* border: 1px solid black; */
   border-left: 1px solid black;
   border-top: 1px solid black;
@@ -151,20 +154,20 @@ div.attack-grid-square{
   color: white;
   padding: 10px;
 }
-.placement-grid div.carrier-color,.display-grid div.carrier-color{
+.placement-grid div.carrier-color,.display-grid div.carrier-color,.reveal-grid div.carrier-color{
   background-color: var(--deep-purple-900);
 }
-.placement-grid div.battleship-color,.display-grid div.battleship-color{
+.placement-grid div.battleship-color,.display-grid div.battleship-color,.reveal-grid div.battleship-color{
   background-color: var(--teal-800);
 }
-.placement-grid div.destroyer-color,.display-grid div.destroyer-color{
+.placement-grid div.destroyer-color,.display-grid div.destroyer-color,.reveal-grid div.destroyer-color{
+  background-color: var(--pink-900);
+}
+.placement-grid div.submarine-color,.display-grid div.submarine-color,.reveal-grid div.submarine-color{
+  background-color: var(--green-800);
+}
+.placement-grid div.boat-color,.display-grid div.boat-color,.reveal-grid div.boat-color{
   background-color: var(--deep-purple-600);
-}
-.placement-grid div.submarine-color,.display-grid div.submarine-color{
-  background-color: var(--teal-600);
-}
-.placement-grid div.boat-color,.display-grid div.boat-color{
-  background-color: var(--deep-purple-300);
 }
 div.main-content{
   width: 100%;
@@ -214,7 +217,7 @@ div.main-content{
   justify-content: center;
   align-items: center;
 }
-.display-grid,.attack-grid{
+.display-grid,.attack-grid, .reveal-grid{
   width: 400px;
   height: 400px;
   background-color:white;
@@ -241,10 +244,60 @@ div.main-content{
   background-position: center;
   background-size: cover;
 }
-.display-grid div.miss, .attack-grid div.miss{
+.display-grid div.miss, .attack-grid div.miss, .reveal-grid div.miss{
   background-color: var(--light-blue-300);
 }
 
 .attack-grid div.sunk{
+  background-color: var(--red-500);
+}
+.modal-container{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  top: 0%;
+  left: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.modal{
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
+  height: 210px;
+  width: 320px;
+  background-color: white;
+  text-align: center;
+  position: relative;
+}
+
+.modal h2{
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
+
+.modal-btn-container{
+  margin-top: 20px;
+}
+.modal-btn-container button{
+  display: inline-block;
+  width: 80px;
+  margin: 0px 20px;
+  padding: 5px;
+  border: none;
+  box-shadow: 2px 2px 3px rgb(101, 101, 101);
+  color: white;
+  font-size: 16px;
+}
+#btn-yes{
+  background-color: var(--teal-600);
+}
+#btn-no{
   background-color: var(--red-500);
 }
