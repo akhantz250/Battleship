@@ -59,6 +59,7 @@ div.target{
   width: 100%;
 }
 .placement-grid{
+  max-height: 500px;
   height: 500px;
   width: 500px;
   min-width: 500px;
@@ -81,14 +82,12 @@ div.target{
 .placement-grid .invalid-square{
   background-color: var(--red-500);
 }
-
 .ship-panel,.button-panel{
   border: 3px solid black;
   height: 500px;
   width: 200px;
   background-color: var(--deep-purple-300);
 }
-
 .button-panel, .ship-button-container{
   display: flex;
   flex-direction: column;
@@ -99,12 +98,10 @@ div.target{
   display: flex;
   flex-direction: column;
 }
-
 .ship-button-container{
   flex-grow: 1;
   padding: 15px;
 }
-
 .button-panel button, .ship-button-container button{
   display: block;
   width: 120px;
@@ -114,7 +111,6 @@ div.target{
   font-size: 16px;
   box-shadow: 2px 2px 3px rgb(101, 101, 101);
 }
-
 .select-btn-container{
   display: flex;
   flex-direction: column;
@@ -133,22 +129,18 @@ div.target{
 .select-btn-container button:hover{
   background-color: var(--deep-purple-900);
 }
-
 .ship-button-container button.selected{
   background-color: var(--teal-800);
   color: white;
 }
-
 .button-panel button:hover:not(:disabled), .ship-button-container button:hover:not(.selected){
   background-color: rgb(197, 197, 197);
 }
-
 .ship-panel h3{
   text-align: center;
   color: white;
   padding: 10px;
 }
-
 .placement-grid div.carrier-color{
   background-color: var(--teal-800);
 }
@@ -165,25 +157,69 @@ div.target{
   background-color: var(--pink-800);
 }
 div.main-content{
-  height: 100%;
-  margin: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
 }
 .placement-container{
   min-height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 110px;
 }
 .placement-info{
+  margin-top: 20px;
   width: 500px;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
   white-space: nowrap;
+}
+.game-content{
+  height: 100%;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 50px;
+}
+.gameboard-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 250px;
+  width: 100%;
+  padding-bottom: 100px;
+}
+.left-side,.right-side{
+  width: 400px;
+  min-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.display-grid,.attack-grid{
+  width: 400px;
+  height: 400px;
+  background-color:white;
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: repeat(10,1fr);
+  grid-template-rows: repeat(10,1fr);
+}
+.game-info{
+  margin-top: 20px;
+  width: 500px;
+  text-align: center;
+  color: white;
+  padding: 15px;
+  background-color: #9575CD;
+  border-radius: 10px;
+  border: 3px solid var(--deep-purple-600) ;
 }

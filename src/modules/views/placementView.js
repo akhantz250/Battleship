@@ -1,6 +1,7 @@
 import { gameController } from '../app/gamecontroller';
 import { helper } from '../app/helper';
 import { Player } from '../app/player';
+import { gameView } from './gameView';
 const placementView = (function () {
   let selectedShip;
   let placementOrientation;
@@ -133,8 +134,8 @@ const placementView = (function () {
         const board = Object.assign({}, shipData);
         gameController.createPlayer1(board);
         gameController.createPlayer2(null);
-        // gameController.startGame();
-        // gameView.initialize();
+        gameController.startGame(gamemode);
+        gameView.initialize();
       } else if (gamemode === 'player') {
         if (playersSet === 0) {
           playersSet++;
@@ -145,6 +146,8 @@ const placementView = (function () {
           const board = Object.assign({}, shipData);
           gameController.createPlayer2(board);
           console.log('player 2 set');
+          gameController.startGame(gamemode);
+          gameView.initialize();
         }
       }
     });

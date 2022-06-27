@@ -1,7 +1,7 @@
 import { Player } from './player';
 
 const gameController = (function () {
-  let player1, player2;
+  let player1, player2, gamemode;
   const createPlayer1 = function (board) {
     player1 = Player();
     if (board === null) {
@@ -20,7 +20,9 @@ const gameController = (function () {
     }
     console.log(player2.gameboard.getShipLocation());
   };
-  const startGame = function () {};
+  const startGame = function (mode) {
+    gamemode = mode === 'player' ? 'player' : 'cpu';
+  };
 
   return { startGame, createPlayer1, createPlayer2 };
 })();
