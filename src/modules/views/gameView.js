@@ -13,13 +13,14 @@ const gameView = (function () {
         </div>
       </div>
   `;
-  let leftSide, rightSide, attackGrid, displayGrid;
+  let leftSide, rightSide, attackGrid, displayGrid, passScreen;
 
   const initialize = function () {
     target.innerHTML = ``;
     target.appendChild(content);
     _setUpAttackGrid();
     _setUpDisplayGrid();
+    _setUpPassScreen();
     leftSide = document.querySelector('.left-side');
     rightSide = document.querySelector('.right-side');
     leftSide.appendChild(displayGrid);
@@ -60,6 +61,20 @@ const gameView = (function () {
         displayGrid.appendChild(square);
       }
     }
+  }
+  function _setUpPassScreen() {
+    passScreen = document.querySelector('.pass-screen');
+    const button = document.querySelector('#pass-screen-btn');
+    button.addEventListener('click', () =>
+      passScreen.classList.remove('show-screen')
+    );
+  }
+  function _showPassScreen(currentPlayer) {
+    passScreen.classList.add('show-screen');
+    const textInfo = document.querySelector('#pass-screen-info');
+    textInfo.textContent = `Pass the device to Player ${
+      currentPlayer === 1 ? 'One' : 'Two'
+    }`;
   }
   const renderAttackGrid = function (board) {
     const squares = document.querySelectorAll('.attack-grid-square');
@@ -129,7 +144,10 @@ const gameView = (function () {
     turnNo,
     mode
   ) {
-    if (mode === 'player') switchGridPos(currentPlayer);
+    if (mode === 'player') {
+      _showPassScreen(currentPlayer);
+      switchGridPos(currentPlayer);
+    }
     renderAttackGrid(attackBoard);
     renderDisplayGrid(ships, displayBoard);
     updateInfo(currentPlayer, turnNo);
