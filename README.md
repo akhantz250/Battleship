@@ -10,7 +10,7 @@ A web application of the [Battleship](<https://en.wikipedia.org/wiki/Battleship_
 
 1. Select gamemode. Play with a friend on the same device or play against the computer.
 1. Place your fleet of five ships. Left click to place and right click to remove. Click the rotate button to change the orientation of the selected ship.
-   1.During the gameplay, select a grid to attack. Blue and red corresponds to miss and hit respectively.
+1. During the gameplay, select a grid to attack. Blue and red corresponds to miss and hit respectively.
 1. A player wins when every opponent's ships are sunk.
 
 ### Tools
@@ -19,7 +19,7 @@ Javascript, CSS, HTML, NPM, Webpack and Jest.
 
 ### Review
 
-This was my first experience writing unit tests and using the TDD methodology using the Jest test runner. Also good practice implementing OOP patterns in Javascript.
+This was my first experience writing unit tests and using the TDD methodology to write the program. Also good practice implementing OOP patterns in Javascript.
 
 ### Screenshot
 
