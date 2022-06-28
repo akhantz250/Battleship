@@ -23,4 +23,4 @@ This was my first experience writing unit tests and using the TDD methodology to
 
 ### Screenshot
 
-![This is a alt text.](https://raw.githubusercontent.com/akhantz250/odin-battleship/main/screenshot.png 'Screenshot')
+![This is a alt text.](https://raw.githubusercontent.com/akhantz250/odin-battleship/main/battleship.png 'Screenshot')

@@ -161,13 +161,13 @@ div.attack-grid-square{
   background-color: var(--teal-800);
 }
 .placement-grid div.destroyer-color,.display-grid div.destroyer-color,.reveal-grid div.destroyer-color{
-  background-color: var(--pink-900);
+  background-color: var(--deep-purple-900);
 }
 .placement-grid div.submarine-color,.display-grid div.submarine-color,.reveal-grid div.submarine-color{
-  background-color: var(--green-800);
+  background-color: var(--teal-800);
 }
 .placement-grid div.boat-color,.display-grid div.boat-color,.reveal-grid div.boat-color{
-  background-color: var(--deep-purple-600);
+  background-color: var(--deep-purple-900);
 }
 div.main-content{
   width: 100%;
@@ -331,4 +331,24 @@ div.main-content{
 }
 .show-screen{
   visibility: visible;
+}
+.placement-grid .ship-head-horizontal,.display-grid .ship-head-horizontal,.reveal-grid .ship-head-horizontal{
+  border-right: none;
+}
+.placement-grid .ship-body-horizontal,.display-grid .ship-body-horizontal,.reveal-grid .ship-body-horizontal{
+  border-left: none;
+  border-right: none;
+}
+.placement-grid .ship-tail-horizontal,.display-grid .ship-tail-horizontal,.reveal-grid .ship-tail-horizontal{
+  border-left: none;
+}
+.placement-grid .ship-head-vertical,.display-grid .ship-head-vertical, .reveal-grid .ship-head-vertical{
+  border-bottom: none;
+}
+.placement-grid .ship-body-vertical, .display-grid .ship-body-vertical, .reveal-grid .ship-body-vertical{
+  border-top: none;
+  border-bottom: none;
+}
+.placement-grid .ship-tail-vertical,.display-grid .ship-tail-vertical,.reveal-grid .ship-tail-vertical{
+  border-top: none;
 }

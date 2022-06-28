@@ -102,6 +102,12 @@ const gameView = (function () {
         'destroyer-color',
         'submarine-color',
         'boat-color',
+        'ship-head-horizontal',
+        'ship-body-horizontal',
+        'ship-tail-horizontal',
+        'ship-head-vertical',
+        'ship-body-vertical',
+        'ship-tail-vertical',
       ];
       square.classList.remove(...classes);
       const ypos = parseInt(square.dataset.y);
@@ -113,13 +119,25 @@ const gameView = (function () {
       }
     });
     for (const ship in ships) {
-      for (let i = 0; i < ships[ship].length; i++) {
+      const length = ships[ship].length;
+      const orientation =
+        ships[ship][1]['x'] - ships[ship][0]['x'] === 1
+          ? 'horizontal'
+          : 'vertical';
+      for (let i = 0; i < length; i++) {
         const xpos = ships[ship][i]['x'];
         const ypos = ships[ship][i]['y'];
         const square = document.querySelector(
           `.display-grid-square[data-x="${xpos}"][data-y="${ypos}"]`
         );
         square.classList.add(`${ship}-color`);
+        if (i === 0) {
+          square.classList.add(`ship-head-${orientation}`);
+        } else if (i === length - 1) {
+          square.classList.add(`ship-tail-${orientation}`);
+        } else {
+          square.classList.add(`ship-body-${orientation}`);
+        }
       }
     }
   };
@@ -199,10 +217,24 @@ const gameView = (function () {
           square.classList.add('sunk');
         }
         for (const ship in ships) {
-          for (let z = 0; z < ships[ship].length; z++) {
+          const length = ships[ship].length;
+          const orientation =
+            ships[ship][1]['x'] - ships[ship][0]['x'] === 1
+              ? 'horizontal'
+              : 'vertical';
+          for (let z = 0; z < length; z++) {
             const xpos = ships[ship][z]['x'];
             const ypos = ships[ship][z]['y'];
-            if (i === xpos && j === ypos) square.classList.add(`${ship}-color`);
+            if (i === xpos && j === ypos) {
+              square.classList.add(`${ship}-color`);
+              if (z === 0) {
+                square.classList.add(`ship-head-${orientation}`);
+              } else if (z === length - 1) {
+                square.classList.add(`ship-tail-${orientation}`);
+              } else {
+                square.classList.add(`ship-body-${orientation}`);
+              }
+            }
           }
         }
         grid.appendChild(square);

@@ -130,7 +130,6 @@ const placementView = (function () {
     });
     goBtn.addEventListener('click', () => {
       if (gamemode === 'cpu') {
-        console.log('game started');
         const board = Object.assign({}, shipData);
         gameController.createPlayer1(board);
         gameController.createPlayer2(null);
@@ -145,7 +144,6 @@ const placementView = (function () {
         } else if (playersSet === 1) {
           const board = Object.assign({}, shipData);
           gameController.createPlayer2(board);
-          console.log('player 2 set');
           gameController.startGame(gamemode);
           gameView.initialize();
         }
@@ -216,7 +214,7 @@ const placementView = (function () {
   function addShip(x, y, name, orientation) {
     const length = helper.shipInfo(name).length;
     if (!checkValidPlacement(x, y, length, orientation)) {
-      console.log('not possible');
+      // console.log('not possible');
       return false;
     }
     if (shipData[name].location.length !== 0) {
@@ -247,6 +245,15 @@ const placementView = (function () {
   function renderGrid() {
     const squares = document.querySelectorAll('.placement-grid > *');
     squares.forEach((square) => {
+      const classes = [
+        'ship-head-horizontal',
+        'ship-body-horizontal',
+        'ship-tail-horizontal',
+        'ship-head-vertical',
+        'ship-body-vertical',
+        'ship-tail-vertical',
+      ];
+      square.classList.remove(...classes);
       square.classList.remove('carrier-color');
       square.classList.remove('battleship-color');
       square.classList.remove('destroyer-color');
@@ -255,7 +262,7 @@ const placementView = (function () {
       square.removeAttribute('data-shiptype', '');
     });
     for (const ship in shipData) {
-      shipData[ship]['location'].forEach((coord) => {
+      shipData[ship]['location'].forEach((coord, index) => {
         const xpos = coord.x;
         const ypos = coord.y;
         const square = document.querySelector(
@@ -263,6 +270,13 @@ const placementView = (function () {
         );
         square.classList.add(`${ship}-color`);
         square.dataset.shiptype = ship;
+        if (index === 0) {
+          square.classList.add(`ship-head-${shipData[ship]['facing']}`);
+        } else if (index === shipData[ship].location.length - 1) {
+          square.classList.add(`ship-tail-${shipData[ship]['facing']}`);
+        } else {
+          square.classList.add(`ship-body-${shipData[ship]['facing']}`);
+        }
       });
     }
   }

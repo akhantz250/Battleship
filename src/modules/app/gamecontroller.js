@@ -10,7 +10,6 @@ const gameController = (function () {
     } else {
       player1.makeBoard(board);
     }
-    console.log(player1.gameboard.getShipLocation());
   };
   const createPlayer2 = function (board) {
     player2 = Player();
@@ -19,7 +18,6 @@ const gameController = (function () {
     } else {
       player2.makeBoard(board);
     }
-    console.log(player2.gameboard.getShipLocation());
   };
   const startGame = function (mode) {
     gamemode = mode === 'player' ? 'player' : 'cpu';
@@ -63,7 +61,7 @@ const gameController = (function () {
         );
         return true;
       } else {
-        console.log('invalid move');
+        // console.log('invalid move');
         return false;
       }
     } else if (currentPlayerTurn === 2 && gamemode === 'player') {
@@ -89,7 +87,7 @@ const gameController = (function () {
         );
         return true;
       } else {
-        console.log('invalid move');
+        // console.log('invalid move');
         return false;
       }
     } else if (gamemode === 'cpu') {
