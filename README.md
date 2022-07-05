@@ -2,7 +2,7 @@
 
 ### About
 
-[Live Demo](https://akhantz250.github.io/Battleship/)
+[See live demo.](https://akhantz250.github.io/Battleship/)
 
 A web application of the [Battleship](<https://en.wikipedia.org/wiki/Battleship_(game)>) game. This project is an assignment from the [Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-battleship) curriculum.
 
